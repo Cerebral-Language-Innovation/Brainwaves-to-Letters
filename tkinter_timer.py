@@ -42,11 +42,11 @@ class Timer(tk.Tk):
         time.sleep(1)
         self.destroy()
 
+    def run(self):
+        self.mainloop()
+
 
 if __name__ == "__main__":
     # Makes an instance of the GUI class and runs it
     # Parameters are specified this way so that they can be changed easily while testing
     app = Timer(count_from=10, action_type="Bite", action_timing=5)
-    app.mainloop()
-
-# TODO: Work with colours and font sizing to make this more readable

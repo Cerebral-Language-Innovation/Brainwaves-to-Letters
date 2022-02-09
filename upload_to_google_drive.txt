@@ -1,0 +1,8 @@
+Python guide: https://developers.google.com/drive/api/v3/quickstart/python
+Note: This process is simple to follow and has solid documentation from Google.
+
+Next Steps:
+1. Starting up a Google Cloud Project (https://developers.google.com/workspace/guides/create-project)
+2. Using the project information, create the authorization credentials (https://developers.google.com/workspace/guides/create-credentials)
+3. Use the code from Google's documentation to test the uploading
+4. Include the uploading into the Final_Protocol.ipynb file.
