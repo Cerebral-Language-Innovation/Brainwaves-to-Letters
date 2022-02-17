@@ -46,7 +46,11 @@ class Timer(tk.Tk):
         self.mainloop()
 
 
-if __name__ == "__main__":
-    # Makes an instance of the GUI class and runs it
-    # Parameters are specified this way so that they can be changed easily while testing
-    app = Timer(count_from=10, action_type="Bite", action_timing=5)
+def run(count_from, action_type, action_timing):
+    """
+    count_from: start time on countdown
+    action_type: EG, Bite, Blink, etc.
+    action_timing: time when the user should be alerted
+    """
+    timer = Timer(count_from=count_from, action_type=action_type, action_timing=action_timing)
+    timer.run()
