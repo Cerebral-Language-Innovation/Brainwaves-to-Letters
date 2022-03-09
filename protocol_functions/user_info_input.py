@@ -1,4 +1,5 @@
 def input_name():
+    # TODO: Add in user ID functionality
     while 1:
         name = input("Please enter your name: ")
         correct = input("You entered " + name.title() + " as your name.\nContinue? \n(Y/N): ")

@@ -1,3 +1,5 @@
+import mne
+from mne import *
 import protocol_functions.tkinter_timer
 import pandas as pd
 import time
