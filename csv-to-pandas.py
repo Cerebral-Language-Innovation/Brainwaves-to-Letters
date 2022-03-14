@@ -3,7 +3,7 @@ import glob
 import pandas as pd
 from IPython.core.display import display
 
-# script to convert all csv files into one pandas Dataframe. Not the read in is in the order stored on the computer.
+# script to convert all csv files into one pandas Dataframe. Note the read in is not in the order stored on the computer.
 # displaying/printing is odd due to the large number of entries per "index". use .iloc[] to access a specific "file"
 # .iloc[][] will return that specific row and column in the data frame respectively.
 # I called the data frame ye cuz idk why not
