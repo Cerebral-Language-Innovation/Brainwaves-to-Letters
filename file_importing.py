@@ -6,10 +6,11 @@ def get_newer_files():
     blinks = []
     files = glob.glob(path + '/*.csv')
     for f in files:
-        if 'blink' in f:
-            blinks.append(f)
-        elif 'bite' in f:
-            bites.append(f)
+        if 'bad' not in f:
+            if 'blink' in f:
+                blinks.append(f)
+            elif 'bite' in f:
+                bites.append(f)
     return bites, blinks
 
 def get_all_files():
