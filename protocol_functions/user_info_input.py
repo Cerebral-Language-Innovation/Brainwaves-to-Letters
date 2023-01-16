@@ -1,16 +1,16 @@
 def input_name():
-    # TODO: Add in user ID functionality
     while 1:
-        name = input("Please enter your name: ")
+        name = input("Please enter your first name, a space, then your last initial: ")
         correct = input("You entered " + name.title() + " as your name.\nContinue? \n(Y/N): ")
         if correct.lower() == "y":
+            name = name.replace(" ", "_")
             return name.lower()
         else:
             continue
 
 
+# TODO: Check for packages? Using sys to see if the user has the required packages or not?
 def install_packages():
-    # TODO: Check for packages? Using sys to see if the user has the required packages or not?
     packages = input("Do you have all of the necessary packages installed? \n(Y/N): ")
     if packages.lower() == "y":
         return True
@@ -18,14 +18,16 @@ def install_packages():
         return False
 
 
+# TODO: Add defensive programming for this function.
 def input_action():
-    # TODO: Make this more flexible by having a TXT file with a list of actions that gets read into an array
-    action_arr = ["Bite", "Blink", "Chatter", "Baseline"]
+    action_arr = ["Baseline", "Bite", "Blink"]
     while 1:
         for x in range(0, len(action_arr)):
             print(str(x + 1) + ") " + action_arr[x])
         action_num = int(input("Enter the action you will be performing: "))
-        selected_action = (action_arr[(action_num - 1)]).lower()  # -1 since the printed list starts at 1.
+
+        # Check that this is within the list range.
+        selected_action = (action_arr[(action_num - 1)]).lower()
 
         # Checking the action selected is in the array
         if 0 < action_num <= len(action_arr):
@@ -48,7 +50,6 @@ def is_number(user_input):
 
 
 def sample_length():
-    # TODO: Possibly change if statement with time_amount? Should these bounds be any different?
     while 1:
         time_amount = int(input("Enter the total sample collection time (seconds): "))
         if 1 < time_amount <= 120:
