@@ -1,3 +1,7 @@
+"""
+NOTE: THIS FILE IS NOW OUTDATED AND NOT COMPATIBLE WITH THE CURRENT DATA FORMAT
+"""
+
 import mne
 import time
 import pandas as pd
@@ -58,7 +62,7 @@ def run(sample_length, action_name, file_name):
             break
     keep_file = keep()
     if not keep_file:
-        file_name = file_name[:-4] + '_FATAL' + file_name[-4:]  # Adds FATAL to the file name
+        file_name = file_name[:-4] + '_BAD' + file_name[-4:]  # Adds FATAL to the file name
     return df.to_csv(file_name)  # converting data to csv
 
 run(10, "Bite", "file_name.csv")

@@ -1,17 +1,25 @@
-"""
-# TODO: Improve on the defensive programming- some errors could happen based on issues with types etc. (EG if the user
-        enters a string for the time_amount integer input)
-# TODO: Improve ease of use. Some of the wording here is a bit hard to follow on the user end also.
-# TODO: Add in labelling of the specific channels in the data? Rather than C1, etc.
-        Q: How do we know which is which?
-"""
+# TODO: Improve on the defensive programming
+# TODO: Improve ease of use. Wording here is a bit hard to follow on the user end.
+# TODO: Check for stream in from muselsl?
+# TODO: Add support for more actions
 
-from user_info_input import *
+import user_info_input
 import pandas as pd
 import time
 import os
 from pylsl import *
-from datetime import date
+from datetime import datetime
+
+
+def bad_sample_check():
+    bad_recording = str(input('Was this a good sample? \n Enter (Y\\N): '))
+    if bad_recording.upper() == "Y":
+        return True
+    elif bad_recording.upper() == "N":
+        return False
+    else:
+        print("Invalid input. Enter Y or N.")
+        return bad_sample_check()
 
 
 def stream_started():
@@ -33,10 +41,10 @@ def relax_check():
 
 
 def main():
-    person_name = input_name()
-    action_name = input_action()
-    action_time = 10  # Can be changed to sample_length() function for time selection.
-    collection_date = date.today().strftime("%d-%m-%Y")
+    person_name = user_info_input.input_name()
+    action_name = user_info_input.input_action()
+    action_time = user_info_input.sample_length()
+    collection_date = datetime.now().strftime("%d-%m-%Y_%H:%M")
 
     file_name = collection_date + "_" + person_name + "_" + action_name + "_" + str(action_time) + "seconds.csv"
     print("Resulting file name: " + file_name)
@@ -47,7 +55,7 @@ def main():
     stream = resolve_stream('type', 'EEG')
     inlet = StreamInlet(stream[0])
 
-    names = ['time', 'c1', 'c2', 'c3', 'c4']  # corrected names for the channel columns
+    names = ['time', 'TP09', 'AF7', 'AF8', 'TP10', 'RIGHT_AUX']
     df = pd.DataFrame(columns=names)
 
     while not relax_check():
@@ -55,25 +63,34 @@ def main():
 
     start = time.time()
     notified = False
-
     while 1:
         s, t = inlet.pull_sample()
         df = pd.concat([df, pd.DataFrame.from_records([{'time': t,
-                                                        'c1': s[0],
-                                                        'c2': s[1],
-                                                        'c3': s[2],
-                                                        'c4': s[3]}])], ignore_index=True)
+                                                        'TP09': s[0],
+                                                        'AF7': s[1],
+                                                        'AF8': s[2],
+                                                        'TP10': s[3]}])], ignore_index=True)
+        # 'RIGHT_AUX': s[4] can be added to the pd.concat, but is unnecessary
         if time.time() - start > (action_time / 2) and not notified and action_name != "baseline":
             notified = True
-            print(action_name + "now")
+            print("\n" + action_name + " now." + "\n")
 
         if time.time() - start > action_time:
             break
 
+    # Starts at 0 rather than UNIX by subtracting first timestamp
+    first_sample = df['time'][0]
+    for x in range(0, (len(df['time'] - 1))):
+        df['time'][x] -= first_sample
+
     directory = os.getcwd()
     directory = directory.replace("protocol_functions", "sample_data")
 
-    df.to_csv(directory + "/" + file_name)  # converting data to csv
+    bad_sample = bad_sample_check()
+    if not bad_sample:
+        file_name = file_name[:-4] + '_BAD' + file_name[-4:]  # Adds BAD to the file name
+
+    return df.to_csv(directory + "/" + file_name)  # converting data to csv
 
 
 if __name__ == "__main__":
