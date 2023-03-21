@@ -4,10 +4,10 @@ May repurpose parts of signal_processing.py
 """
 
 import mne
-from file_importing import get_newer_files
 import pandas as pd
 import numpy as np
 import os
+from file_importing import get_newer_files
 
 
 def fourier_transform(np_arrs, window_size):
@@ -20,19 +20,6 @@ def fourier_transform(np_arrs, window_size):
         return False
     # TODO: consider verbose and tstep parameters
     return mne.time_frequency.stft(np_arrs, window_size)
-
-
-"""
-def test_fourier():
-    df = pd.DataFrame(columns=['c1', 'c2', 'c3', 'c4'])
-    bites, blinks = get_newer_files()
-
-    d = pd.read_csv(blinks[0])
-    arr = [np.array(d.c1), np.array(d.c2), np.array(d.c3), np.array(d.c4)]
-
-    fourier_transform(arr, 4)
-    print("")
-"""
 
 
 # def PCA():
@@ -78,3 +65,7 @@ def main():
         np_bites.append(get_numpy_array(bite_df))
     for blink_df in blink_dfs:
         np_blinks.append(get_numpy_array(blink_df))
+
+    print("")
+
+main()

@@ -6,7 +6,7 @@ import tensorflow as tf
 
 class ANN:
     """
-    This class will compile create an ANN for EEG machine learning in a reusable format (since this is OOP).
+    This class will creates an ANN for EEG machine learning in a reusable format
     """
     def __init__(self, X_train):
         self.X_train = X_train
