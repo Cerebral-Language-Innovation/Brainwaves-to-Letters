@@ -47,7 +47,7 @@ def test_fourier():
 
 def get_pandas_dataframes():
     """
-    :returns an arrays of blink and bit Pandas dataframes from the sample_data folder
+    :returns an arrays of blink and bite Pandas dataframes from the sample_data folder
     """
     bites, blinks = get_newer_files()  # Function which searches for all bites and blinks from the sample_data folder
     bite_dataframes = []
