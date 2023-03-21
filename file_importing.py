@@ -1,7 +1,7 @@
 import glob
 
 def get_newer_files():
-    path = 'Bite and Blink Data Analysis v1'
+    path = 'sample_data'
     bites = []
     blinks = []
     files = glob.glob(path + '/*.csv')
