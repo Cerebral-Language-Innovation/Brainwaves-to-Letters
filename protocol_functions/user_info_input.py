@@ -1,10 +1,9 @@
 def input_name():
     while 1:
-        name = input("Please enter your first name, a space, then your last initial: ")
-        correct = input("You entered " + name.title() + " as your name.\nContinue? \n(Y/N): ")
+        id = input("Please enter your ID: ")
+        correct = input("You entered " + str(id) + " as your id.\nContinue? \n(Y/N): ")
         if correct.lower() == "y":
-            name = name.replace(" ", "_")
-            return name.lower()
+            return "S" + str(id)
         else:
             continue
 

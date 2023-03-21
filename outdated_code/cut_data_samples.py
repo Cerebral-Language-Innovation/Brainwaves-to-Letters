@@ -1,3 +1,6 @@
+"""
+NOTE: THIS FILE IS NOW OUTDATED AND NOT COMPATIBLE WITH THE CURRENT DATA FORMAT
+"""
 from file_importing import get_newer_files
 import pandas as pd
 import numpy as np

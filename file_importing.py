@@ -13,8 +13,8 @@ def get_newer_files():
                 bites.append(f)
     return bites, blinks
 
-def get_all_files():
-    path = 'Bite and Blink Data Analysis v1'
+def get_older_files():
+    path = 'outdated_code/Bite and Blink Data Analysis v1'
     c1 = []
     c2 = []
     c3 = []

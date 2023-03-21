@@ -2,14 +2,13 @@
 # TODO: Improve ease of use. Wording here is a bit hard to follow on the user end.
 # TODO: Check for stream in from muselsl?
 # TODO: Add support for more actions
-# TODO: Fix naming convention to not store participant name
 
-import user_info_input
 import pandas as pd
 import time
 import os
 from pylsl import *
 from datetime import datetime
+import user_info_input
 
 
 def bad_sample_check():
@@ -65,7 +64,6 @@ def main():
     start = time.time()
     notified = False
     while 1:
-        # TODO: try to add index as a column at the top of the dataframe
         s, t = inlet.pull_sample()
         df = pd.concat([df, pd.DataFrame.from_records([{'time': t,
                                                         'TP09': s[0],

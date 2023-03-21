@@ -74,9 +74,7 @@ def main():
     np_bites = []
     np_blinks = []
 
-    for df in bite_dfs:
-        np_bites.append(get_numpy_array(df))
-    for df in blink_dfs:
-        np_blinks.append(get_numpy_array(df))
-
-# Gets
+    for bite_df in bite_dfs:
+        np_bites.append(get_numpy_array(bite_df))
+    for blink_df in blink_dfs:
+        np_blinks.append(get_numpy_array(blink_df))
